@@ -40,10 +40,9 @@ sub read_string {
   my $numblocks = $class->_read_numblocks( \$clone );
 
   my @blocks;
-  my $state = {};
 
   for my $id ( 1 .. $numblocks ) {
-    push @blocks, $class->_read_block( \$clone, $id, $state );
+    push @blocks, $class->_read_block( \$clone, $id, );
   }
 
   if ( length $clone ) {
@@ -102,7 +101,7 @@ sub _read_block_group {
 }
 
 sub _read_group_end {
-  my ( $class, $id, $group, $label, $block_body, $state ) = @_;
+  my ( $class, $group, $label ) = @_;
   return {
     type => 'group_end',
     ( $group ? ( group => $group ) : () ),
@@ -111,7 +110,7 @@ sub _read_group_end {
 }
 
 sub _read_group_start {
-  my ( $class, $id, $group, $label, $block_body, $state ) = @_;
+  my ( $class, $group, $label ) = @_;
   return {
     type => 'group_start',
     ( $group ? ( group => $group ) : () ),
@@ -172,7 +171,7 @@ sub _read_color {
 }
 
 sub _read_block_label {
-  my ( undef, $string ) = @_;
+  my ( undef,  $string ) = @_;
   my ( $label, $rest )   = ( ${$string} =~ /\A(.*?)${UTF16NULL}(.*\z)/msx );
   if ( defined $rest ) {
     ${$string} = "$rest";
@@ -201,7 +200,7 @@ sub _read_block_length {
 }
 
 sub _read_block {
-  my ( $class, $string, $id, $state ) = @_;
+  my ( $class, $string, $id, ) = @_;
   my $type   = $class->_read_block_type($string);
   my $length = $class->_read_block_length($string);
   my $block_body;
@@ -214,13 +213,13 @@ sub _read_block {
   }
 
   if ( $BLOCK_GROUP_END eq $type ) {
-    return $class->_read_group_end( $id, $group, $label, \$block_body, $state );
+    return $class->_read_group_end( $group, $label, );
   }
   if ( $BLOCK_GROUP_START eq $type ) {
-    return $class->_read_group_start( $id, $group, $label, \$block_body, $state );
+    return $class->_read_group_start( $group, $label, );
   }
   if ( $BLOCK_COLOR eq $type ) {
-    return $class->_read_color( $id, $group, $label, \$block_body, $state );
+    return $class->_read_color( $id, $group, $label, \$block_body, );
   }
   die "Unknown type $type";
 
