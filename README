@@ -1,0 +1,47 @@
+NAME
+    Color::Swatch::ASE::Reader - Low-Level ASE (Adobe Swatch Exchange) File
+    decoder
+
+VERSION
+    version 0.001000
+
+SYNOPSIS
+      use Color::Swatch::ASE::Reader;
+      my $hash = Color::Swatch::ASE::Reader->read_file(q[./myfile.ase]);
+      print Dumper($hash);
+
+    This at present is very low-level simple structure decoding, and is
+    probably not useful to most people.
+
+    Its based on the reverse-engineered specification of Adobe™'s "Swatch
+    Exchange" format, which can be found documented many places:
+
+    *   selpa.net: file formats
+        <http://www.selapa.net/swatches/colors/fileformats.php>
+
+    *   colourlovers.com: ase file maker
+        <http://www.colourlovers.com/ase.phps>
+
+    *   forums.adobe.com: ase file format reverse engineering
+        <https://forums.adobe.com/thread/322021?start=0&tstart=0>
+
+METHODS
+  "read_file"
+      my $hash = CSASE::Reader->read_file("path/to/file.ase");
+
+  "read_filehandle"
+      my $hash = CSASE::Reader->read_filehandle($fh);
+
+  "read_string"
+      my $hash = CSASE::Reader->read_filehandle($string);
+
+AUTHOR
+    Kent Fredric <kentfredric@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by Kent Fredric
+    <kentfredric@gmail.com>.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
