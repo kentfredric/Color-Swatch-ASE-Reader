@@ -166,7 +166,7 @@ sub _read_block_label {
     ${$string} = "$rest";
   }
   else {
-    ${$string} = "";
+    ${$string} = q[]
   }
   return decode( 'UTF-16BE', $label, Encode::FB_CROAK );
 }
