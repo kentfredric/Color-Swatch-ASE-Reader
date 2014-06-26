@@ -124,30 +124,42 @@ sub _read_rgb {
   return $class->_read_bytes( $block_body, 12, 'f>f>f>' );
 }
 
-sub _read_color {
-  my ( $class, $id, $group, $label, $block_body, $state ) = @_;
-  my $model = $class->_read_bytes( $block_body, 4 );
-  my @values;
+my $color_table = {
+  q[RGB ] => '_read_rgb',
+  q[LAB ] => '_read_lab',
+  q[CMYK] => '_read_cymk',
+  q[Gray] => '_read_gray',
+};
 
+sub _read_color_model {
+  my ( $class, $id, $block_body ) = @_;
+  my $model = $class->_read_bytes( $block_body, 4 );
   if ( not defined $model ) {
     die "No COLOR MODEL for block $id";
   }
-  if ( q[RGB ] eq $model ) {
-    @values = $class->_read_rgb($block_body);
-  }
-  elsif ( q[LAB ] eq $model ) {
-    @values = $class->_read_lab($block_body);
-  }
-  elsif ( q[CMYK] eq $model ) {
-    @values = $class->_read_cmyk($block_body);
-  }
-  elsif ( q[Gray] eq $model ) {
-    @values = $class->_read_gray($block_body);
-  }
-  else {
+  if ( not exists $color_table->{$model} ) {
     die "Unsupported model $model";
   }
+  return $model;
+}
+
+sub _read_color_type {
+  my ( $class, $id, $block_body ) = @_;
   my $type = $class->_read_bytes( $block_body, 2, q[n] );
+  return $type;
+}
+
+sub _read_color {
+  my ( $class, $id, $group, $label, $block_body, $state ) = @_;
+
+  my $model = $class->_read_color_model( $id, $block_body );
+
+  my @values;
+
+  my $method = $class->can( $color_table->{$model} );
+  @values = $class->$method($block_body);
+
+  my $type = $class->_read_color_type($block_body);
   return {
     type => 'color',
     ( $group ? ( group => $group ) : () ),
@@ -166,7 +178,7 @@ sub _read_block_label {
     ${$string} = "$rest";
   }
   else {
-    ${$string} = q[]
+    ${$string} = q[];
   }
   return decode( 'UTF-16BE', $label, Encode::FB_CROAK );
 }
