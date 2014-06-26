@@ -144,7 +144,7 @@ sub _read_color_model {
 }
 
 sub _read_color_type {
-  my ( $class, $id, $block_body ) = @_;
+  my ( $class, $block_body ) = @_;
   my $type = $class->_read_bytes( $block_body, 2, q[n] );
   return $type;
 }
