@@ -1,5 +1,5 @@
 ---
-abstract: 'Read ASE Files and turn them into abstract structures'
+abstract: 'Low-Level ASE (Adobe Swatch Exchange) File decoder'
 author:
   - 'Kent Fredric <kentfredric@gmail.com>'
 build_requires:
@@ -21,7 +21,7 @@ name: Color-Swatch-ASE-Reader
 provides:
   Color::Swatch::ASE::Reader:
     file: lib/Color/Swatch/ASE/Reader.pm
-    version: '0.000000'
+    version: '0.001000'
 requires:
   Encode: '0'
   Moo: '0'
@@ -30,7 +30,7 @@ requires:
   strict: '0'
   utf8: '0'
   warnings: '0'
-version: '0.000000'
+version: '0.001000'
 x_BuiltWith:
   modules:
     CPAN::Meta: '2.141520'
@@ -422,7 +422,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: 0.000000-source
+          tag: 0.001000-source
           tag_format: '%v-source'
           tag_message: v%v
           time_zone: local
@@ -476,7 +476,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: releases
           signed: 0
-          tag: '0.000000'
+          tag: '0.001000'
           tag_format: '%v'
           tag_message: v%v
           time_zone: local

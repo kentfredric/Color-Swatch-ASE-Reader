@@ -10,7 +10,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Read ASE Files and turn them into abstract structures",
+  "ABSTRACT" => "Low-Level ASE (Adobe Swatch Exchange) File decoder",
   "AUTHOR" => "Kent Fredric <kentfredric\@gmail.com>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
@@ -35,7 +35,7 @@ my %WriteMakefileArgs = (
     "Test::More" => "0.89",
     "version" => 0
   },
-  "VERSION" => "0.000000",
+  "VERSION" => "0.001000",
   "test" => {
     "TESTS" => "t/*.t t/00-compile/*.t"
   }

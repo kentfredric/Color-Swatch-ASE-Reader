@@ -5,7 +5,9 @@ use utf8;
 
 package Color::Swatch::ASE::Reader;
 
-# ABSTRACT: Read ASE Files and turn them into abstract structures
+our $VERSION = '0.001000';
+
+# ABSTRACT: Low-Level ASE (Adobe Swatch Exchange) File decoder
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
@@ -217,11 +219,11 @@ __END__
 
 =head1 NAME
 
-Color::Swatch::ASE::Reader - Read ASE Files and turn them into abstract structures
+Color::Swatch::ASE::Reader - Low-Level ASE (Adobe Swatch Exchange) File decoder
 
 =head1 VERSION
 
-version 0.000000
+version 0.001000
 
 =head1 AUTHOR
 

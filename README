@@ -1,9 +1,9 @@
 NAME
-    Color::Swatch::ASE::Reader - Read ASE Files and turn them into abstract
-    structures
+    Color::Swatch::ASE::Reader - Low-Level ASE (Adobe Swatch Exchange) File
+    decoder
 
 VERSION
-    version 0.000000
+    version 0.001000
 
 AUTHOR
     Kent Fredric <kentfredric@gmail.com>
