@@ -101,7 +101,7 @@ sub _read_block_group {
 }
 
 sub _read_group_end {
-  my ( $class, $group, $label ) = @_;
+  my ( undef, $group, $label ) = @_;
   return {
     type => 'group_end',
     ( $group ? ( group => $group ) : () ),
@@ -110,7 +110,7 @@ sub _read_group_end {
 }
 
 sub _read_group_start {
-  my ( $class, $group, $label ) = @_;
+  my ( undef, $group, $label ) = @_;
   return {
     type => 'group_start',
     ( $group ? ( group => $group ) : () ),
