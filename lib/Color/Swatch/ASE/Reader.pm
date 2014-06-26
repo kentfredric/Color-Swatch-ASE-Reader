@@ -11,6 +11,28 @@ our $VERSION = '0.001000';
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 use Encode qw( decode );
 
 ## no critic (ValuesAndExpressions::ProhibitEscapedCharacters)
@@ -20,16 +42,34 @@ my $BLOCK_COLOR       = "\x{00}\x{01}";
 my $UTF16NULL         = "\x{00}\x{00}";
 ## use critic
 
+
+
+
+
+
+
 sub read_file {
   my ( $class, $file ) = @_;
   require Path::Tiny;
   return $class->read_string( Path::Tiny::path($file)->slurp_raw );
 }
 
+
+
+
+
+
+
 sub read_filehandle {
   my ( $class, $filehandle ) = @_;
   return $class->read_string( scalar <$filehandle> );
 }
+
+
+
+
+
+
 
 sub read_string {
   my ( $class, $string ) = @_;
@@ -242,6 +282,40 @@ Color::Swatch::ASE::Reader - Low-Level ASE (Adobe Swatch Exchange) File decoder
 =head1 VERSION
 
 version 0.001000
+
+=head1 SYNOPSIS
+
+  use Color::Swatch::ASE::Reader;
+  my $hash = Color::Swatch::ASE::Reader->read_file(q[./myfile.ase]);
+  print Dumper($hash);
+
+This at present is very low-level simple structure decoding, and is probably not useful to most people.
+
+Its based on the reverse-engineered specification of Adobe™'s "Swatch Exchange" format, which can be found documented many places:
+
+=over 4
+
+=item * L<selpa.net: file formats|http://www.selapa.net/swatches/colors/fileformats.php>
+
+=item * L<colourlovers.com: ase file maker|http://www.colourlovers.com/ase.phps>
+
+=item * L<forums.adobe.com: ase file format reverse engineering|https://forums.adobe.com/thread/322021?start=0&tstart=0>
+
+=back
+
+=head1 METHODS
+
+=head2 C<read_file>
+
+  my $hash = CSASE::Reader->read_file("path/to/file.ase");
+
+=head2 C<read_filehandle>
+
+  my $hash = CSASE::Reader->read_filehandle($fh);
+
+=head2 C<read_string>
+
+  my $hash = CSASE::Reader->read_filehandle($string);
 
 =head1 AUTHOR
 

@@ -112,6 +112,17 @@
       }
    },
    "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/kentfredric/Color-Swatch-ASE-Reader/issues"
+      },
+      "homepage" : "https://github.com/kentfredric/Color-Swatch-ASE-Reader",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/kentfredric/Color-Swatch-ASE-Reader.git",
+         "web" : "https://github.com/kentfredric/Color-Swatch-ASE-Reader"
+      }
+   },
    "version" : "0.001000",
    "x_BuiltWith" : {
       "modules" : {
