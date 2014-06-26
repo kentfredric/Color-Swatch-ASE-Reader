@@ -14,9 +14,9 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use Encode qw( decode );
 
 ## no critic (ValuesAndExpressions::ProhibitEscapedCharacters)
-my $BLOCK_GROUP_BEGIN = "\x{c0}\x{01}";
+my $BLOCK_GROUP_START = "\x{c0}\x{01}";
 my $BLOCK_GROUP_END   = "\x{c0}\x{02}";
-my $BLOCK_COLOR       = "\x{00}\x{02}";
+my $BLOCK_COLOR       = "\x{00}\x{01}";
 my $UTF16NULL         = "\x{00}\x{00}";
 ## use critic
 
@@ -61,7 +61,7 @@ sub _read_bytes {
   my ( $class, $string, $num, $decode ) = @_;
   return if ( length ${$string} ) < $num;
   my $chars = substr ${$string}, 0, $num, '';
-  if ( 0 and $ENV{TRACE_ASE} ) {
+  if ( 1 and $ENV{TRACE_ASE} ) {
     my $context = [ caller(1) ]->[3];
     my @chars = split //, $chars;
     print $context . q[ ];
@@ -123,6 +123,21 @@ sub _read_rgb {
   return $class->_read_bytes( $block_body, 12, 'f>f>f>' );
 }
 
+sub _read_lab {
+  my ( $class, $block_body ) = @_;
+  return $class->_read_bytes( $block_body, 12, 'f>f>f>' );
+}
+
+sub _read_cmyk {
+  my ( $class, $block_body ) = @_;
+  return $class->_read_bytes( $block_body, 16, 'f>f>f>f>' );
+}
+
+sub _read_gray {
+  my ( $class, $block_body ) = @_;
+  return $class->_read_bytes( $block_body, 4, 'f>' );
+}
+
 my $color_table = {
   q[RGB ] => '_read_rgb',
   q[LAB ] => '_read_lab',
@@ -173,6 +188,21 @@ sub _read_color {
 sub _read_block_label {
   my ( undef,  $string ) = @_;
   my ( $label, $rest )   = ( ${$string} =~ /\A(.*?)${UTF16NULL}(.*\z)/msx );
+  if ( 1 and $ENV{TRACE_ASE} ) {
+    my $context = [ caller(1) ]->[3];
+    print $context . q[/read_label label=];
+    my @chars = split //, $label;
+    for my $char (@chars) {
+      printf "%02x ", ord($char);
+    }
+    print q[ rest=];
+
+    @chars = split //, $rest;
+    for my $char (@chars) {
+      printf "%02x ", ord($char);
+    }
+    print "\n";
+  }
   if ( defined $rest ) {
     ${$string} = "$rest";
   }
