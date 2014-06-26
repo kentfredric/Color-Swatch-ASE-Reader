@@ -16,12 +16,12 @@ use Encode qw( decode );
 sub read_file {
   my ( $class, $file ) = @_;
   require Path::Tiny;
-  $class->read_string( Path::Tiny::path($file)->slurp_raw );
+  return $class->read_string( Path::Tiny::path($file)->slurp_raw );
 }
 
 sub read_filehandle {
   my ( $class, $filehandle ) = @_;
-  $class->read_string( scalar <$filehandle> );
+  return $class->read_string( scalar <$filehandle> );
 }
 
 sub read_string {
@@ -43,7 +43,7 @@ sub read_string {
     warn( ( length $clone ) . " bytes of unhandled data" );
   }
 
-  {
+  return {
     signature => $signature,
     version   => $version,
     blocks    => \@blocks
@@ -64,38 +64,39 @@ sub _read_bytes {
     }
     print "\n";
   }
-  ($decode) ? ( unpack $decode, $chars ) : ($chars);
+  return unpack $decode, $chars if $decode;
+  return $chars;
 }
 
 sub _read_signature {
   my ( $class, $string ) = @_;
   my $signature = $class->_read_bytes( $string, 4 );
   die "No ASEF signature " if not defined $signature or q[ASEF] ne $signature;
-  $signature;
+  return $signature;
 }
 
 sub _read_version {
   my ( $class, $string ) = @_;
   my (@version) = $class->_read_bytes( $string, 4, q[nn] );
   die "No VERSION header" if @version != 2;
-  \@version;
+  return \@version;
 }
 
 sub _read_numblocks {
   my ( $class, $string ) = @_;
   my $blocks = $class->_read_bytes( $string, 4, q[N] );
   die "No NUM BLOCKS header" if not defined $blocks;
-  $blocks;
+  return $blocks;
 }
 
 sub _read_block_group {
   my ( $class, $string ) = @_;
-  $class->_read_bytes( $string, 2, q[n] );
+  return $class->_read_bytes( $string, 2, q[n] );
 }
 
 sub _read_group_end {
   my ( $class, $id, $group, $label, $block_body, $state ) = @_;
-  {
+  return {
     type => 'group_end',
     ( $group ? ( group => $group ) : () ),
     ( $label ? ( label => $label ) : () ),
@@ -104,7 +105,7 @@ sub _read_group_end {
 
 sub _read_group_start {
   my ( $class, $id, $group, $label, $block_body, $state ) = @_;
-  {
+  return {
     type => 'group_start',
     ( $group ? ( group => $group ) : () ),
     ( $label ? ( label => $label ) : () ),
@@ -113,7 +114,7 @@ sub _read_group_start {
 
 sub _read_rgb {
   my ( $class, $block_body ) = @_;
-  $class->_read_bytes( $block_body, 12, 'f>f>f>' );
+  return $class->_read_bytes( $block_body, 12, 'f>f>f>' );
 }
 
 sub _read_color {
@@ -140,7 +141,7 @@ sub _read_color {
     die "Unsupported model $model";
   }
   my $type = $class->_read_bytes( $block_body, 2, q[n] );
-  {
+  return {
     type => 'color',
     ( $group ? ( group => $group ) : () ),
     ( $label ? ( label => $label ) : () ),
@@ -160,14 +161,14 @@ sub _read_block_label {
   else {
     ${$string} = "";
   }
-  decode( 'UTF-16BE', $label, Encode::FB_CROAK );
+  return decode( 'UTF-16BE', $label, Encode::FB_CROAK );
 }
 
 sub _read_block_type {
   my ( $class, $string, $id ) = @_;
   my $type = $class->_read_bytes( $string, 2 );
   die "No BLOCK TYPE for block $id" if not defined $type;
-  $type;
+  return $type;
 }
 
 sub _read_block_length {
@@ -177,7 +178,7 @@ sub _read_block_length {
   if ( ( length ${$string} ) < $length ) {
     warn "Possibly corrupt file, EOF before length $length in block $id";
   }
-  $length;
+  return $length;
 }
 
 sub _read_block {
