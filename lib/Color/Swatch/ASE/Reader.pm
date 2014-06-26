@@ -1,4 +1,4 @@
-use 5.008;    # utf8
+use 5.010;    # unpack >
 use strict;
 use warnings;
 use utf8;
