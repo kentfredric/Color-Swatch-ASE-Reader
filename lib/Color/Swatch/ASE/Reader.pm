@@ -13,6 +13,13 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Encode qw( decode );
 
+## no critic (ValuesAndExpressions::ProhibitEscapedCharacters)
+my $BLOCK_GROUP_BEGIN = "\x{c0}\x{01}";
+my $BLOCK_GROUP_END   = "\x{c0}\x{02}";
+my $BLOCK_COLOR       = "\x{00}\x{02}";
+my $UTF16NULL         = "\x{00}\x{00}";
+## use critic
+
 sub read_file {
   my ( $class, $file ) = @_;
   require Path::Tiny;
@@ -154,7 +161,7 @@ sub _read_color {
 
 sub _read_block_label {
   my ( $class, $string ) = @_;
-  my ( $label, $rest )   = ( ${$string} =~ /\A(.*?)\x{00}\x{00}(.*\z)/msx );
+  my ( $label, $rest )   = ( ${$string} =~ /\A(.*?)${UTF16NULL}(.*\z)/msx );
   if ( defined $rest ) {
     ${$string} = "$rest";
   }
@@ -194,13 +201,13 @@ sub _read_block {
     $label      = $class->_read_block_label( \$block_body );
   }
 
-  if ( "\x{c0}\x{02}" eq $type ) {
+  if ( $BLOCK_GROUP_END eq $type ) {
     return $class->_read_group_end( $id, $group, $label, \$block_body, $state );
   }
-  if ( "\x{c0}\x{01}" eq $type ) {
+  if ( $BLOCK_GROUP_START eq $type ) {
     return $class->_read_group_start( $id, $group, $label, \$block_body, $state );
   }
-  if ( "\x{00}\x{01}" eq $type ) {
+  if ( $BLOCK_COLOR eq $type ) {
     return $class->_read_color( $id, $group, $label, \$block_body, $state );
   }
   die "Unknown type $type";
