@@ -24,7 +24,6 @@ provides:
     version: '0.001000'
 requires:
   Encode: '0'
-  Moo: '0'
   Path::Tiny: '0'
   perl: '5.008'
   strict: '0'
@@ -83,7 +82,6 @@ x_BuiltWith:
     ExtUtils::MakeMaker: '6.98'
     File::Spec::Functions: '3.48'
     List::Util: '1.39'
-    Moo: '1.005000'
     Path::Tiny: '0.054'
     Pod::Coverage::TrustPod: '0.100003'
     Test::CPAN::Changes: '0.28'

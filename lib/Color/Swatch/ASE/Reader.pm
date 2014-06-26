@@ -11,12 +11,12 @@ our $VERSION = '0.001000';
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
-use Moo;
-use Path::Tiny qw(path);
+use Encode qw( decode );
 
 sub read_file {
   my ( $class, $file ) = @_;
-  $class->read_string( path($file)->slurp_raw );
+  require Path::Tiny;
+  $class->read_string( Path::Tiny::path($file)->slurp_raw );
 }
 
 sub read_filehandle {
@@ -40,13 +40,13 @@ sub read_string {
   }
 
   if ( length $clone ) {
-    warn ( ( length $clone ) . " bytes of unhandled data" );
+    warn( ( length $clone ) . " bytes of unhandled data" );
   }
-  
+
   {
     signature => $signature,
-    version  => $version,
-    blocks => \@blocks
+    version   => $version,
+    blocks    => \@blocks
   };
 
 }
@@ -151,26 +151,25 @@ sub _read_color {
 
 }
 
-use Encode;
-
 sub _read_block_label {
   my ( $class, $string ) = @_;
   my ( $label, $rest )   = ( ${$string} =~ /\A(.*?)\x{00}\x{00}(.*\z)/msx );
   if ( defined $rest ) {
     ${$string} = "$rest";
-  } else {
+  }
+  else {
     ${$string} = "";
   }
   decode( 'UTF-16BE', $label, Encode::FB_CROAK );
 }
 
-
 sub _read_block_type {
-  my ( $class, $string, $id ) = @_ ;
+  my ( $class, $string, $id ) = @_;
   my $type = $class->_read_bytes( $string, 2 );
   die "No BLOCK TYPE for block $id" if not defined $type;
   $type;
 }
+
 sub _read_block_length {
   my ( $class, $string, $id ) = @_;
   my $length = $class->_read_bytes( $string, 4, q[N] );
@@ -178,13 +177,13 @@ sub _read_block_length {
   if ( ( length ${$string} ) < $length ) {
     warn "Possibly corrupt file, EOF before length $length in block $id";
   }
-  $length
+  $length;
 }
 
 sub _read_block {
   my ( $class, $string, $id, $state ) = @_;
-  my $type =   $class->_read_block_type( $string );
-  my $length = $class->_read_block_length( $string );
+  my $type   = $class->_read_block_type($string);
+  my $length = $class->_read_block_length($string);
   my $block_body;
   my $group;
   my $label;
@@ -206,8 +205,6 @@ sub _read_block {
   die "Unknown type $type";
 
 }
-
-no Moo;
 
 1;
 

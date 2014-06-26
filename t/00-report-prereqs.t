@@ -110,7 +110,6 @@ my $static_prereqs = do { my $x = {
        'runtime' => {
                       'requires' => {
                                       'Encode' => '0',
-                                      'Moo' => '0',
                                       'Path::Tiny' => '0',
                                       'perl' => '5.008',
                                       'strict' => '0',
