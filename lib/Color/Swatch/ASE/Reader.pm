@@ -150,7 +150,7 @@ sub _read_color_type {
 }
 
 sub _read_color {
-  my ( $class, $id, $group, $label, $block_body, $state ) = @_;
+  my ( $class, $id, $group, $label, $block_body ) = @_;
 
   my $model = $class->_read_color_model( $id, $block_body );
 
@@ -172,7 +172,7 @@ sub _read_color {
 }
 
 sub _read_block_label {
-  my ( $class, $string ) = @_;
+  my ( undef, $string ) = @_;
   my ( $label, $rest )   = ( ${$string} =~ /\A(.*?)${UTF16NULL}(.*\z)/msx );
   if ( defined $rest ) {
     ${$string} = "$rest";
