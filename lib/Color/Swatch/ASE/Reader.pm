@@ -46,21 +46,17 @@ sub read_string {
   }
 
   if ( length $clone ) {
-    warn( ( length $clone ) . ' bytes of unhandled data' );
+    warn +( ( length $clone ) . ' bytes of unhandled data' );
   }
 
-  return {
-    signature => $signature,
-    version   => $version,
-    blocks    => \@blocks
-  };
+  return { signature => $signature, version => $version, blocks => \@blocks, };
 
 }
 
 sub _read_bytes {
-  my ( $class, $string, $num, $decode ) = @_;
+  my ( undef, $string, $num, $decode ) = @_;
   return if ( length ${$string} ) < $num;
-  my $chars = substr ${$string}, 0, $num, '';
+  my $chars = substr ${$string}, 0, $num, q[];
   if ( 1 and $ENV{TRACE_ASE} ) {
     my $context = [ caller(1) ]->[3];
     my @chars = split //, $chars;
