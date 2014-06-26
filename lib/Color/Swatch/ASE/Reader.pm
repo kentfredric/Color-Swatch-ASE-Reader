@@ -46,7 +46,7 @@ sub read_string {
   }
 
   if ( length $clone ) {
-    warn( ( length $clone ) . " bytes of unhandled data" );
+    warn( ( length $clone ) . ' bytes of unhandled data' );
   }
 
   return {
@@ -64,7 +64,7 @@ sub _read_bytes {
   if ( 0 and $ENV{TRACE_ASE} ) {
     my $context = [ caller(1) ]->[3];
     my @chars = split //, $chars;
-    print $context . " ";
+    print $context . q[ ];
     for my $char (@chars) {
       printf "%02x ", ord($char);
     }
@@ -77,21 +77,21 @@ sub _read_bytes {
 sub _read_signature {
   my ( $class, $string ) = @_;
   my $signature = $class->_read_bytes( $string, 4 );
-  die "No ASEF signature " if not defined $signature or q[ASEF] ne $signature;
+  die 'No ASEF signature' if not defined $signature or q[ASEF] ne $signature;
   return $signature;
 }
 
 sub _read_version {
   my ( $class, $string ) = @_;
   my (@version) = $class->_read_bytes( $string, 4, q[nn] );
-  die "No VERSION header" if @version != 2;
+  die 'No VERSION header' if @version != 2;
   return \@version;
 }
 
 sub _read_numblocks {
   my ( $class, $string ) = @_;
   my $blocks = $class->_read_bytes( $string, 4, q[N] );
-  die "No NUM BLOCKS header" if not defined $blocks;
+  die 'No NUM BLOCKS header' if not defined $blocks;
   return $blocks;
 }
 
