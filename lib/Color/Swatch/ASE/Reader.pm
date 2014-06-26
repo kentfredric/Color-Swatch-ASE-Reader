@@ -57,15 +57,6 @@ sub _read_bytes {
   my ( undef, $string, $num, $decode ) = @_;
   return if ( length ${$string} ) < $num;
   my $chars = substr ${$string}, 0, $num, q[];
-  if ( 1 and $ENV{TRACE_ASE} ) {
-    my $context = [ caller(1) ]->[3];
-    my @chars = split //, $chars;
-    print $context . q[ ];
-    for my $char (@chars) {
-      printf "%02x ", ord($char);
-    }
-    print "\n";
-  }
   return unpack $decode, $chars if $decode;
   return $chars;
 }
@@ -184,21 +175,6 @@ sub _read_color {
 sub _read_block_label {
   my ( undef,  $string ) = @_;
   my ( $label, $rest )   = ( ${$string} =~ /\A(.*?)${UTF16NULL}(.*\z)/msx );
-  if ( 1 and $ENV{TRACE_ASE} ) {
-    my $context = [ caller(1) ]->[3];
-    print $context . q[/read_label label=];
-    my @chars = split //, $label;
-    for my $char (@chars) {
-      printf "%02x ", ord($char);
-    }
-    print q[ rest=];
-
-    @chars = split //, $rest;
-    for my $char (@chars) {
-      printf "%02x ", ord($char);
-    }
-    print "\n";
-  }
   if ( defined $rest ) {
     ${$string} = "$rest";
   }
