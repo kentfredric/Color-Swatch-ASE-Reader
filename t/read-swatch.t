@@ -11,6 +11,13 @@ use Path::Tiny qw(path);
 
 my $out = Color::Swatch::ASE::Reader->read_file( path('./corpus/Spring_Blush.ase') );
 
+for my $block ( @{ $out->{blocks} } ) {
+  next unless exists $block->{values};
+  for my $value_no ( 0 .. $#{ $block->{values} } ) {
+    $block->{values}->[$value_no] = int( 255 * $block->{values}->[$value_no] );
+  }
+}
+
 eq_or_diff $out,
   {
   'blocks' => [
@@ -24,35 +31,35 @@ eq_or_diff $out,
       'group'      => 1,
       'model'      => 'RGB ',
       'type'       => 'color',
-      'values'     => [ '0.364705890417099', '0.447058826684952', '0.647058844566345' ]
+      'values'     => [ 93, 114, 165 ]
     },
     {
       'color_type' => 2,
       'group'      => 1,
       'model'      => 'RGB ',
       'type'       => 'color',
-      'values'     => [ '0.733333349227905', '0.776470601558685', '0.313725501298904' ]
+      'values'     => [ 187, 198, 80 ],
     },
     {
       'color_type' => 2,
       'group'      => 1,
       'model'      => 'RGB ',
       'type'       => 'color',
-      'values'     => [ '0.839215695858002', '0.807843148708344', '0.564705908298492' ]
+      'values'     => [ 214, 206, 144 ]
     },
     {
       'color_type' => 2,
       'group'      => 1,
       'model'      => 'RGB ',
       'type'       => 'color',
-      'values'     => [ '0.345098048448563', '0.329411774873734', '0.23137255012989' ]
+      'values'     => [ 88, 84, 59 ]
     },
     {
       'color_type' => 2,
       'group'      => 1,
       'model'      => 'RGB ',
       'type'       => 'color',
-      'values'     => [ '0.749019622802734', '0.682352960109711', '0.580392181873322' ]
+      'values'     => [ 191, 174, 148 ]
     },
     {
       'type' => 'group_end'
