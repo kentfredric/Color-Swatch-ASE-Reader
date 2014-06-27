@@ -1,6 +1,8 @@
 Release history for Color-Swatch-ASE-Reader
 
 {{$NEXT}}
+
+0.001001 2014-06-27T19:27:46Z
  [Bugfix]
  - Attempt to solve problem with comparison due to different amounts of precision by reducing required comparative
    precision to 8 bits, by translating into an int between 0 and 255
