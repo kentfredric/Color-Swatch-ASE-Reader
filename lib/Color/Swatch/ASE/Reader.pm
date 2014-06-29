@@ -306,8 +306,8 @@ version 0.001002
   #   version   => [ 1, 0 ],
   #   blocks    => [
   #     { type => 'group_start', group => 13, label => "My Swatch" },
-  #     { type => 'color',       
-  #         group => 1,  label => "Some Shade", 
+  #     { type => 'color',
+  #         group => 1,  label => "Some Shade",
   #         model => 'RGB ', values => [ 0.9, 0.8, 0.7 ], color_type => 2 },
   #     { type => 'group_end' },
   #   ]
