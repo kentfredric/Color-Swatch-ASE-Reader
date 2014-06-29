@@ -5,7 +5,7 @@ use utf8;
 
 package Color::Swatch::ASE::Reader;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 # ABSTRACT: Low-Level ASE (Adobe Swatch Exchange) File decoder
 
