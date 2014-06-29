@@ -17,6 +17,18 @@ our $VERSION = '0.001002';
   my $hash = Color::Swatch::ASE::Reader->read_file(q[./myfile.ase]);
   print Dumper($hash);
 
+  # {
+  #   signature => 'ASEF',
+  #   version   => [ 1, 0 ],
+  #   blocks    => [
+  #     { type => 'group_start', group => 13, label => "My Swatch" },
+  #     { type => 'color',
+  #         group => 1,  label => "Some Shade",
+  #         model => 'RGB ', values => [ 0.9, 0.8, 0.7 ], color_type => 2 },
+  #     { type => 'group_end' },
+  #   ]
+  # }
+
 This at present is very low-level simple structure decoding, and is probably not useful to most people.
 
 Its based on the reverse-engineered specification of Adobe™'s "Swatch Exchange" format, which can be found documented many places:
@@ -67,7 +79,7 @@ sub read_filehandle {
 
 =method C<read_string>
 
-  my $hash = CSASE::Reader->read_filehandle($string);
+  my $hash = CSASE::Reader->read_string($string);
 
 =cut
 
