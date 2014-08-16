@@ -6,6 +6,7 @@ Release history for Color-Swatch-ASE-Reader
  - no code changes.
  - Tests augmented.
  - metdata updated.
+ - whitespace reduced.
 
  [Dependencies::Stats]
  - Dependencies changed since 0.001002, see misc/*.deps* for details
@@ -15,6 +16,9 @@ Release history for Color-Swatch-ASE-Reader
 
  [Metadata]
  - migrate to kentnl org.
+
+ [Misc]
+ - Improve source side POD to reduce build side whitespace.
 
  [Tests]
  - update Test::ReportPrereqs

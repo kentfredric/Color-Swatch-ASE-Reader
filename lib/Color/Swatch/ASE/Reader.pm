@@ -11,40 +11,6 @@ our $VERSION = '0.001003';
 
 # AUTHORITY
 
-=head1 SYNOPSIS
-
-  use Color::Swatch::ASE::Reader;
-  my $hash = Color::Swatch::ASE::Reader->read_file(q[./myfile.ase]);
-  print Dumper($hash);
-
-  # {
-  #   signature => 'ASEF',
-  #   version   => [ 1, 0 ],
-  #   blocks    => [
-  #     { type => 'group_start', group => 13, label => "My Swatch" },
-  #     { type => 'color',
-  #         group => 1,  label => "Some Shade",
-  #         model => 'RGB ', values => [ 0.9, 0.8, 0.7 ], color_type => 2 },
-  #     { type => 'group_end' },
-  #   ]
-  # }
-
-This at present is very low-level simple structure decoding, and is probably not useful to most people.
-
-Its based on the reverse-engineered specification of Adobe™'s "Swatch Exchange" format, which can be found documented many places:
-
-=over 4
-
-=item * L<selpa.net: file formats|http://www.selapa.net/swatches/colors/fileformats.php>
-
-=item * L<colourlovers.com: ase file maker|http://www.colourlovers.com/ase.phps>
-
-=item * L<forums.adobe.com: ase file format reverse engineering|https://forums.adobe.com/thread/322021?start=0&tstart=0>
-
-=back
-
-=cut
-
 use Encode qw( decode );
 
 ## no critic (ValuesAndExpressions::ProhibitEscapedCharacters)
@@ -281,3 +247,36 @@ sub _read_block {
 
 1;
 
+=head1 SYNOPSIS
+
+  use Color::Swatch::ASE::Reader;
+  my $hash = Color::Swatch::ASE::Reader->read_file(q[./myfile.ase]);
+  print Dumper($hash);
+
+  # {
+  #   signature => 'ASEF',
+  #   version   => [ 1, 0 ],
+  #   blocks    => [
+  #     { type => 'group_start', group => 13, label => "My Swatch" },
+  #     { type => 'color',
+  #         group => 1,  label => "Some Shade",
+  #         model => 'RGB ', values => [ 0.9, 0.8, 0.7 ], color_type => 2 },
+  #     { type => 'group_end' },
+  #   ]
+  # }
+
+This at present is very low-level simple structure decoding, and is probably not useful to most people.
+
+Its based on the reverse-engineered specification of Adobe™'s "Swatch Exchange" format, which can be found documented many places:
+
+=over 4
+
+=item * L<selpa.net: file formats|http://www.selapa.net/swatches/colors/fileformats.php>
+
+=item * L<colourlovers.com: ase file maker|http://www.colourlovers.com/ase.phps>
+
+=item * L<forums.adobe.com: ase file format reverse engineering|https://forums.adobe.com/thread/322021?start=0&tstart=0>
+
+=back
+
+=cut
