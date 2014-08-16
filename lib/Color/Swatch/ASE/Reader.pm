@@ -5,45 +5,11 @@ use utf8;
 
 package Color::Swatch::ASE::Reader;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 # ABSTRACT: Low-Level ASE (Adobe Swatch Exchange) File decoder
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 use Encode qw( decode );
 
@@ -293,7 +259,7 @@ Color::Swatch::ASE::Reader - Low-Level ASE (Adobe Swatch Exchange) File decoder
 
 =head1 VERSION
 
-version 0.001002
+version 0.001003
 
 =head1 SYNOPSIS
 

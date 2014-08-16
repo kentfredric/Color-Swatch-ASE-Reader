@@ -3,7 +3,7 @@ NAME
     decoder
 
 VERSION
-    version 0.001002
+    version 0.001003
 
 SYNOPSIS
       use Color::Swatch::ASE::Reader;
