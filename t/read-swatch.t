@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More;
+use Test::More tests => 1;
 use Test::Differences qw( eq_or_diff );
 
 # ABSTRACT: Test reading a swatch
@@ -69,6 +69,3 @@ eq_or_diff $out,
   'version'   => [ 1, 0 ],
   },
   'ASE File decodes correctly';
-
-done_testing;
-
