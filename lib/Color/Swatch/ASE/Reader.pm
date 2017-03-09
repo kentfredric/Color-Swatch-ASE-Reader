@@ -4,7 +4,7 @@ use warnings;
 
 package Color::Swatch::ASE::Reader;
 
-our $VERSION = '0.001004';
+our $VERSION = '0.001005';
 
 # ABSTRACT: Low-Level ASE (Adobe Swatch Exchange) File decoder
 
