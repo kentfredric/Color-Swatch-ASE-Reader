@@ -7,7 +7,7 @@ Release history for Color-Swatch-ASE-Reader
  - Dependencies changed since 0.001003, see misc/*.deps* for details
  - configure: +1 (recommends: ↑1)
  - develop: +14 ↑3 -3 (recommends: +1, suggests: ↑2)
- - runtime: (recommends: +1)
+ - runtime: -1 (recommends: +1)
  - test: +1 ↓1 (recommends: ↑1 ↓1)
 
 0.001003 2014-08-16T05:38:21Z

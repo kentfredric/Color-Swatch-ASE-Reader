@@ -53,6 +53,9 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Dist::Zilla::Plugin::MetaYAML
  - Dist::Zilla::Plugin::ReadmeFromPod
 
+ [Removed / runtime requires]
+ - utf8
+
 0.001003 2014-08-16T05:38:21Z
  [Added / develop requires]
  - Dist::Zilla::Plugin::Git::Contributors 0.006
