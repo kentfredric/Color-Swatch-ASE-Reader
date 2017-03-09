@@ -20,7 +20,6 @@ my %WriteMakefileArgs = (
     "Encode" => 0,
     "Path::Tiny" => 0,
     "strict" => 0,
-    "utf8" => 0,
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
@@ -44,7 +43,6 @@ my %FallbackPrereqs = (
   "Test::Differences" => 0,
   "Test::More" => 0,
   "strict" => 0,
-  "utf8" => 0,
   "warnings" => 0
 );
 
