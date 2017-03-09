@@ -124,7 +124,7 @@
    "provides" : {
       "Color::Swatch::ASE::Reader" : {
          "file" : "lib/Color/Swatch/ASE/Reader.pm",
-         "version" : "0.001004"
+         "version" : "0.001005"
       }
    },
    "release_status" : "stable",
@@ -139,7 +139,7 @@
          "web" : "https://github.com/kentnl/Color-Swatch-ASE-Reader"
       }
    },
-   "version" : "0.001004",
+   "version" : "0.001005",
    "x_BuiltWith" : {
       "external_file" : "misc/built_with.json"
    },
@@ -643,7 +643,7 @@
                   "branch" : null,
                   "changelog" : "Changes",
                   "signed" : 0,
-                  "tag" : "0.001004-source",
+                  "tag" : "0.001005-source",
                   "tag_format" : "%v-source",
                   "tag_message" : "v%v"
                },
@@ -737,7 +737,7 @@
                   "branch" : "releases",
                   "changelog" : "Changes",
                   "signed" : 0,
-                  "tag" : "0.001004",
+                  "tag" : "0.001005",
                   "tag_format" : "%v",
                   "tag_message" : "v%v"
                },
