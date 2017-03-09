@@ -1,6 +1,14 @@
 Release history for Color-Swatch-ASE-Reader
 
 {{$NEXT}}
+ - BugFix: Avoid test failures with -Ddefault_inc_excludes_dot
+
+ [Dependencies::Stats]
+ - Dependencies changed since 0.001003, see misc/*.deps* for details
+ - configure: +1 (recommends: ↑1)
+ - develop: +14 ↑3 -3 (recommends: +1, suggests: ↑2)
+ - runtime: (recommends: +1)
+ - test: +1 ↓1 (recommends: ↑1 ↓1)
 
 0.001003 2014-08-16T05:38:21Z
  [00 Trivial]
@@ -35,4 +43,3 @@ Release history for Color-Swatch-ASE-Reader
 
 0.001000 2014-06-26T14:03:41Z
  - First version.
-

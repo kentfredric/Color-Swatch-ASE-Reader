@@ -1,2 +1,3 @@
-.build
-Color-Swatch-ASE-Reader-*
+/.build
+/Color-Swatch-ASE-Reader-*
+/tmp/
