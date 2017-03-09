@@ -1,6 +1,6 @@
 Release history for Color-Swatch-ASE-Reader
 
-0.001004 2017-03-09T19:12:25Z fbf89fb
+0.001004 2017-03-09T19:15:23Z 2964226
  - BugFix: Avoid test failures with -Ddefault_inc_excludes_dot
 
  [Dependencies::Stats]
