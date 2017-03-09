@@ -1,11 +1,10 @@
 use 5.010;    # unpack >
 use strict;
 use warnings;
-use utf8;
 
 package Color::Swatch::ASE::Reader;
 
-our $VERSION = '0.001003';
+our $VERSION = '0.001004';
 
 # ABSTRACT: Low-Level ASE (Adobe Swatch Exchange) File decoder
 
@@ -259,7 +258,7 @@ Color::Swatch::ASE::Reader - Low-Level ASE (Adobe Swatch Exchange) File decoder
 
 =head1 VERSION
 
-version 0.001003
+version 0.001004
 
 =head1 SYNOPSIS
 
@@ -309,11 +308,11 @@ Its based on the reverse-engineered specification of Adobe™'s "Swatch Exchange
 
 =head1 AUTHOR
 
-Kent Fredric <kentfredric@gmail.com>
+Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2017 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
